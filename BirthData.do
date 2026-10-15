@@ -46,11 +46,14 @@ replace smoker =. if cigdur == ""
 label define smokerl 0 "Did not smoke during pregnancy" 1 "Smoked during pregnancy", modify
 label values smoker smokerl
 label variable smoker "Smoked during pregnancy"
-gen educ = meduc_r
+gen educ = meduc
 replace educ=. if meduc_r == 9
 label define educl 1 "Less than high school" 2 "High school graduate or GED" 3 "Some college" 4 "Bachelors Degree" 5"Masters or PhD", modify 
 label values educ educl
 label variable educ "Mother's Education Level"
+tab educ
+tab2 inadequate preterm
+tab inadequate preterm, chi2
 
 drop if missing(preterm)
 drop if missing(inadequate)
@@ -58,3 +61,5 @@ drop if missing(mager)
 drop if missing(raceth)
 drop if missing(meduc_r)
 drop if missing(cigdur)
+
+tab raceth
